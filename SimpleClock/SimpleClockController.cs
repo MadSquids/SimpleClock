@@ -1,91 +1,79 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 namespace SimpleClock
 {
-    /// <summary>
-    /// Monobehaviours (scripts) are added to GameObjects.
-    /// For a full list of Messages a Monobehaviour can receive from the game, see https://docs.unity3d.com/ScriptReference/MonoBehaviour.html.
-    /// </summary>
     public class SimpleClockController : MonoBehaviour
     {
-        public static SimpleClockController Instance { get; private set; }
+        private Text clockText;
+        private Font clockFont = Resources.Load<Font>("Arial");
+        private GameObject canvasGameObject;
 
-        // These methods are automatically called by Unity, you should remove any you aren't using.
-        #region Monobehaviour Messages
-        /// <summary>
-        /// Only ever called once, mainly used to initialize variables.
-        /// </summary>
-        private void Awake()
-        {
-            // For this particular MonoBehaviour, we only want one instance to exist at any time, so store a reference to it in a static property
-            //   and destroy any that are created while one already exists.
-            if (Instance != null)
-            {
-                Plugin.Log?.Warn($"Instance of {GetType().Name} already exists, destroying.");
-                GameObject.DestroyImmediate(this);
-                return;
-            }
-            GameObject.DontDestroyOnLoad(this); // Don't destroy this object on scene changes
-            Instance = this;
-            Plugin.Log?.Debug($"{name}: Awake()");
-        }
-        /// <summary>
-        /// Only ever called once on the first frame the script is Enabled. Start is called after any other script's Awake() and before Update().
-        /// </summary>
         private void Start()
         {
-
+            MakeClock();
+            Debug.Log("Font: " + clockFont);
         }
 
-        /// <summary>
-        /// Called every frame if the script is enabled.
-        /// </summary>
+        private void MakeClock()
+        {
+            DontDestroyOnLoad(this.gameObject);
+
+            //Create a new Canvas
+            canvasGameObject = new GameObject("SimpleClockCanvas");
+            var canvas = canvasGameObject.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            Debug.Log(canvasGameObject);
+
+            //Create a new Text Object
+            var textGameObject = new GameObject("SimpleClockText");
+            textGameObject.transform.SetParent(canvasGameObject.transform, false);
+
+            // Add Text Component
+            clockText = textGameObject.AddComponent<Text>();
+            clockText.font = clockFont;
+            Debug.Log("Parent: " + clockText.transform.parent.gameObject);
+            Debug.Log(clockText);
+            Debug.Log(clockText.font);
+            clockText.fontSize = 36;
+            clockText.alignment = TextAnchor.UpperCenter;
+
+            // Set the RectTransform of the Text object
+            var rectTransform = clockText.rectTransform;
+            rectTransform.localPosition = new Vector3(0, -50, 0);
+            rectTransform.sizeDelta = new Vector2(400, 100);
+
+            Debug.Log("SimpleClockController initialized.");
+        }
+
         private void Update()
         {
-
+            if (clockText != null)
+            {
+                clockText.text = DateTime.Now.ToString("hh:mm tt");
+            }
+            else
+            {
+                Debug.LogWarning("clockText is null.");
+            }
+            
         }
 
-        /// <summary>
-        /// Called every frame after every other enabled script's Update().
-        /// </summary>
-        private void LateUpdate()
-        {
-
-        }
-
-        /// <summary>
-        /// Called when the script becomes enabled and active
-        /// </summary>
-        private void OnEnable()
-        {
-
-        }
-
-        /// <summary>
-        /// Called when the script becomes disabled or when it is being destroyed.
-        /// </summary>
-        private void OnDisable()
-        {
-
-        }
-
-        /// <summary>
-        /// Called when the script is being destroyed.
-        /// </summary>
         private void OnDestroy()
         {
-            Plugin.Log?.Debug($"{name}: OnDestroy()");
-            if (Instance == this)
-                Instance = null; // This MonoBehaviour is being destroyed, so set the static instance property to null.
-
+            if (canvasGameObject != null)
+            {
+                Destroy(canvasGameObject);
+                Debug.Log("SimpleClockCanvas destroyed.");
+            }
         }
-        #endregion
     }
 }
