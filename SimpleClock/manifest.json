@@ -7,6 +7,7 @@
   "description": "This mod adds a clock to your game based on your OS's time.",
   "gameVersion": "1.37.0",
   "dependsOn": {
-    "BSIPA": "^4.2.0"
+    "BSIPA": "^4.2.0",
+    "BeatSaberMarkupLanguage": "^1.11.2"
   }
 }

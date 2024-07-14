@@ -1,59 +1,22 @@
 ﻿using System;
-//using System.Collections;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
+using BeatSaberMarkupLanguage;
+using BeatSaberMarkupLanguage.FloatingScreen;
+using TMPro;
 
 
 namespace SimpleClock
 {
     public class SimpleClockController : MonoBehaviour
     {
-        private Text clockText;
-        private Font clockFont = Resources.Load<Font>("Arial");
-        private GameObject canvasGameObject;
+        private FloatingScreen screen;
+        private TextMeshProUGUI clockText;
 
+        
         private void Start()
         {
             MakeClock();
-            Debug.Log("Font: " + clockFont);
         }
-
-        private void MakeClock()
-        {
-            DontDestroyOnLoad(this.gameObject);
-
-            //Create a new Canvas
-            canvasGameObject = new GameObject("SimpleClockCanvas");
-            var canvas = canvasGameObject.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            Debug.Log(canvasGameObject);
-
-            //Create a new Text Object
-            var textGameObject = new GameObject("SimpleClockText");
-            textGameObject.transform.SetParent(canvasGameObject.transform, false);
-
-            // Add Text Component
-            clockText = textGameObject.AddComponent<Text>();
-            clockText.font = clockFont;
-            Debug.Log("Parent: " + clockText.transform.parent.gameObject);
-            Debug.Log(clockText);
-            Debug.Log(clockText.font);
-            clockText.fontSize = 36;
-            clockText.alignment = TextAnchor.UpperCenter;
-
-            // Set the RectTransform of the Text object
-            var rectTransform = clockText.rectTransform;
-            rectTransform.localPosition = new Vector3(0, -50, 0);
-            rectTransform.sizeDelta = new Vector2(400, 100);
-
-            Debug.Log("SimpleClockController initialized.");
-        }
-
         private void Update()
         {
             if (clockText != null)
@@ -64,15 +27,76 @@ namespace SimpleClock
             {
                 Debug.LogWarning("clockText is null.");
             }
-            
+
+        }
+
+        //Makes the clock.
+        private void MakeClock()
+        {
+            DontDestroyOnLoad(gameObject);
+
+            //Error catching
+            try
+            {
+                //Create floating screen
+                screen = FloatingScreen.CreateFloatingScreen(
+                    new Vector2(150f, 50f),     //screen size
+                    false,                      //create handle
+                    new Vector3(0f, 2f, 2f),    //position
+                    Quaternion.identity,        //rotation
+                    0f,                         //curvaturRadius
+                    false                       //hasBackground
+                    );
+
+                //Check if screen was made. else throw error.
+                if (screen != null)
+                {
+                    //Create text
+                    clockText = BeatSaberUI.CreateText(
+                        screen.gameObject.GetComponent<RectTransform>(),
+                        GetCurrentTime(),
+                        new Vector2(0, 0)
+                    );
+
+                    //Check if text was made. else throw error.
+                    if (clockText != null)
+                    {
+                        Debug.Log("clockText created successfully.");
+                        //Configure Text
+                        clockText.alignment = TextAlignmentOptions.TopJustified;
+                        clockText.fontSize = 4f;
+                        clockText.color = Color.white;
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to create clockText.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Failed to create screen.");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Exception while creating clock: {e}");
+            }
+
+            Debug.Log("SimpleClockController initialized.");
+        }
+
+        //Returns current time as a String in hours:minutes AM/PM format.
+        private string GetCurrentTime()
+        {
+            return DateTime.Now.ToString("hh:mm tt");
         }
 
         private void OnDestroy()
         {
-            if (canvasGameObject != null)
+            if (screen != null)
             {
-                Destroy(canvasGameObject);
-                Debug.Log("SimpleClockCanvas destroyed.");
+                Destroy(screen);
+                Debug.Log("SimpleClockScreen destroyed.");
             }
         }
     }
