@@ -47,9 +47,9 @@ namespace SimpleClock
             {
                 //Create floating screen
                 screen = FloatingScreen.CreateFloatingScreen(
-                    new Vector2(150f, 50f),     //screen size
+                    new Vector2(30f, 15f),     //screen size
                     false,                      //create handle
-                    new Vector3(0f, 2f, 2f),    //position
+                    new Vector3(0f, 2.75f, 3f),    //position
                     Quaternion.identity,        //rotation
                     0f,                         //curvaturRadius
                     false                       //hasBackground
@@ -71,8 +71,8 @@ namespace SimpleClock
                         //Debug.Log("clockText created successfully.");
 
                         //Configure Text
-                        clockText.alignment = TextAlignmentOptions.TopJustified;
-                        clockText.fontSize = 4f;
+                        clockText.alignment = TextAlignmentOptions.Center;
+                        clockText.fontSize = 8f;
                         clockText.color = Color.white;
 
                         //Start checking for the time every second.

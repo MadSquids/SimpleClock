@@ -59,7 +59,7 @@ namespace SimpleClock
             private void Start()
             {
                 //Invoke after 5 seconds to wait for BSML.
-                Invoke(nameof(StartClockController), 10f);
+                Invoke(nameof(StartClockController), 7.5f);
             }
 
             private void StartClockController()
