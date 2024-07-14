@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.FloatingScreen;
@@ -12,22 +13,27 @@ namespace SimpleClock
         private FloatingScreen screen;
         private TextMeshProUGUI clockText;
 
-        
         private void Start()
         {
             MakeClock();
         }
-        private void Update()
-        {
-            if (clockText != null)
-            {
-                clockText.text = DateTime.Now.ToString("hh:mm tt");
-            }
-            else
-            {
-                Debug.LogWarning("clockText is null.");
-            }
 
+        //Updates the time of the clock every second.
+        private IEnumerator UpdateTime()
+        {
+            while (true)
+            {
+                if (clockText != null)
+                {
+                    Debug.Log("Checking Time.");
+                    clockText.text = GetCurrentTime();
+                    yield return new WaitForSeconds(1);
+                }
+                else
+                {
+                    Debug.LogWarning("clockText is null.");
+                }
+            }
         }
 
         //Makes the clock.
@@ -66,6 +72,9 @@ namespace SimpleClock
                         clockText.alignment = TextAlignmentOptions.TopJustified;
                         clockText.fontSize = 4f;
                         clockText.color = Color.white;
+
+                        //Start checking for the time every second.
+                        StartCoroutine(UpdateTime());
                     }
                     else
                     {
@@ -84,8 +93,6 @@ namespace SimpleClock
 
             Debug.Log("SimpleClockController initialized.");
         }
-
-        
 
         //Returns current time as a String in hours:minutes AM/PM format.
         private string GetCurrentTime()
