@@ -1,6 +1,7 @@
 ﻿using IPA;
 using UnityEngine;
 using IPALogger = IPA.Logging.Logger;
+using SiraUtil.Zenject;
 
 namespace SimpleClock
 {
@@ -9,6 +10,7 @@ namespace SimpleClock
     {
         internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
+
 
         [Init]
         /// <summary>
@@ -42,16 +44,13 @@ namespace SimpleClock
             //Delay the start of simpleClock to allow for BSML to start.
             GameObject initObject = new GameObject("SimpleClockInitializer");
             initObject.AddComponent<DelayedInitializer>();
-            GameObject.DontDestroyOnLoad(initObject);
-
-            
+            GameObject.DontDestroyOnLoad(initObject);     
         }
 
         [OnExit]
         public void OnApplicationQuit()
         {
-            Log.Debug("OnApplicationQuit");
-
+            //Log.Debug("OnApplicationQuit");
         }
 
         private class DelayedInitializer : MonoBehaviour
