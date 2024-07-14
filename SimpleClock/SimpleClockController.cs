@@ -32,7 +32,7 @@ namespace SimpleClock
                 }
                 else
                 {
-                    Debug.LogWarning("clockText is null.");
+                    Debug.LogError("clockText is null. The clock is broken. :(\nStart an issue on the github for SimpleClock, post your _latest.log, and I will likely fix it.");
                 }
             }
         }
