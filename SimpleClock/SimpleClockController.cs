@@ -85,6 +85,8 @@ namespace SimpleClock
             Debug.Log("SimpleClockController initialized.");
         }
 
+        
+
         //Returns current time as a String in hours:minutes AM/PM format.
         private string GetCurrentTime()
         {

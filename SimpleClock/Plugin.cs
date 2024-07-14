@@ -39,8 +39,12 @@ namespace SimpleClock
         public void OnApplicationStart()
         {
             Log.Debug("OnApplicationStart");
-            new GameObject("SimpleClockController").AddComponent<SimpleClockController>();
+            //Delay the start of simpleClock to allow for BSML to start.
+            GameObject initObject = new GameObject("SimpleClockInitializer");
+            initObject.AddComponent<DelayedInitializer>();
+            GameObject.DontDestroyOnLoad(initObject);
 
+            
         }
 
         [OnExit]
@@ -48,6 +52,21 @@ namespace SimpleClock
         {
             Log.Debug("OnApplicationQuit");
 
+        }
+
+        private class DelayedInitializer : MonoBehaviour
+        {
+            private void Start()
+            {
+                //Invoke after 5 seconds to wait for BSML.
+                Invoke(nameof(StartClockController), 15f);
+            }
+
+            private void StartClockController()
+            {
+                Log.Debug("Starting SimpleClockController after delay");
+                new GameObject("SimpleClockController").AddComponent<SimpleClockController>();
+            }
         }
     }
 }
