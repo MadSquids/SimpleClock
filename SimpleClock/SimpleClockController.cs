@@ -25,7 +25,8 @@ namespace SimpleClock
             {
                 if (clockText != null)
                 {
-                    Debug.Log("Checking Time.");
+                    //Debug.Log("Checking Time.");
+
                     clockText.text = GetCurrentTime();
                     yield return new WaitForSeconds(1);
                 }
@@ -67,7 +68,8 @@ namespace SimpleClock
                     //Check if text was made. else throw error.
                     if (clockText != null)
                     {
-                        Debug.Log("clockText created successfully.");
+                        //Debug.Log("clockText created successfully.");
+
                         //Configure Text
                         clockText.alignment = TextAlignmentOptions.TopJustified;
                         clockText.fontSize = 4f;
@@ -91,7 +93,7 @@ namespace SimpleClock
                 Debug.LogError($"Exception while creating clock: {e}");
             }
 
-            Debug.Log("SimpleClockController initialized.");
+            //Debug.Log("SimpleClockController initialized.");
         }
 
         //Returns current time as a String in hours:minutes AM/PM format.

@@ -59,12 +59,12 @@ namespace SimpleClock
             private void Start()
             {
                 //Invoke after 5 seconds to wait for BSML.
-                Invoke(nameof(StartClockController), 15f);
+                Invoke(nameof(StartClockController), 10f);
             }
 
             private void StartClockController()
             {
-                Log.Debug("Starting SimpleClockController after delay");
+                Log.Debug("Starting SimpleClockController");
                 new GameObject("SimpleClockController").AddComponent<SimpleClockController>();
             }
         }
