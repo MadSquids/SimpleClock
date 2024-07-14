@@ -32,7 +32,9 @@ namespace SimpleClock
                 }
                 else
                 {
-                    Debug.LogError("clockText is null. The clock is broken. :(\nStart an issue on the github for SimpleClock, post your _latest.log, and I will likely fix it.");
+                    Debug.LogError("clockText is null.");
+                    ClockBroken();      //Clock is broken calling broken function and destroying the clock.
+                    yield break;
                 }
             }
         }
@@ -83,16 +85,19 @@ namespace SimpleClock
                     else
                     {
                         Debug.LogError("Failed to create clockText.");
+                        ClockBroken();      //Clock is broken calling broken function and destroying the clock.
                     }
                 }
                 else
                 {
                     Debug.LogError("Failed to create screen.");
+                    ClockBroken();      //Clock is broken calling broken function and destroying the clock.
                 }
             }
             catch (Exception e)
             {
                 Debug.LogError($"Exception while creating clock: {e}");
+                ClockBroken();      //Clock is broken calling broken function and destroying the clock.
             }
 
             //Debug.Log("SimpleClockController initialized.");
@@ -102,6 +107,17 @@ namespace SimpleClock
         private string GetCurrentTime()
         {
             return DateTime.Now.ToString("hh:mm tt");
+        }
+
+        private void ClockBroken()
+        {
+            if (screen != null)
+            {
+                Destroy(screen);
+            }
+
+            //Error message for the logs so people know what to do to get the plugin fixed.
+            Debug.LogError("The clock is broken. :(\nStart an issue on the GitHub for SimpleClock, post your _latest.log, and I will likely fix it. :)");
         }
 
         private void OnDestroy()
