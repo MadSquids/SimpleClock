@@ -125,7 +125,7 @@ namespace SimpleClock
             if (screen != null)
             {
                 Destroy(screen);
-                Debug.Log("SimpleClockScreen destroyed.");
+                //Debug.Log("SimpleClockScreen destroyed.");
             }
         }
     }
