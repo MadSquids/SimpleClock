@@ -58,6 +58,8 @@ namespace SimpleClock
                 //Check if screen was made. else throw error.
                 if (screen != null)
                 {
+                    DontDestroyOnLoad(screen);
+
                     //Create text
                     clockText = BeatSaberUI.CreateText(
                         screen.gameObject.GetComponent<RectTransform>(),
