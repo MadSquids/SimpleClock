@@ -115,8 +115,7 @@ namespace SimpleClock
             {
                 if (_clockText != null)
                 {
-                    Debug.Log("Checking Time.");
-
+                    //Debug.Log("Checking Time.");
                     _clockText.text = GetCurrentTime();
                     yield return new WaitForSeconds(1);
                 }
