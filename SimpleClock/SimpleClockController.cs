@@ -45,12 +45,12 @@ namespace SimpleClock
             {
                 //Create floating screen
                 _screen = FloatingScreen.CreateFloatingScreen(
-                    new Vector2(30f, 15f),     //screen size
-                    false,                      //create handle
-                    new Vector3(0f, 2.75f, 3f),    //position
-                    Quaternion.identity,        //rotation
-                    0f,                         //curvaturRadius
-                    false                       //hasBackground
+                    new Vector2(30f, 15f),       //screen size
+                    false,                       //create handle
+                    new Vector3(0f, 2.75f, 3f),  //position
+                    Quaternion.identity,         //rotation
+                    0f,                          //curvaturRadius
+                    false                        //hasBackground
                     );
 
                 //Check if screen was made. else throw error.
