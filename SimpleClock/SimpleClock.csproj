@@ -120,7 +120,6 @@
     <Compile Include="CoroutineRunner.cs" />
     <Compile Include="SimpleClockInstaller.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="PluginConfig.cs" />
     <Compile Include="SimpleClockController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
