@@ -47,7 +47,7 @@ namespace SimpleClock
                 _screen = FloatingScreen.CreateFloatingScreen(
                     new Vector2(30f, 15f),       //screen size
                     false,                       //create handle
-                    new Vector3(0f, 2.75f, 3f),  //position
+                    new Vector3(0f, 2.75f, 4f),  //position
                     Quaternion.identity,         //rotation
                     0f,                          //curvaturRadius
                     false                        //hasBackground
