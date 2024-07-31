@@ -3,9 +3,11 @@
 This Beat Saber plugin adds a 12-hour AM/PM clock to the HUD of your game using your system's time.
 
 ## Current Features and the Future
-The clock is in the 12-hour AM/PM format and is set to the top center of the screen with no customization options available in the game.\
-You can edit the source code files if you want to change the clock. (MakeClock() is where you would want to make the changes)\
-Future development may see customization options become available within the game allowing seamless customization.
+The clock is in the 12-hour AM/PM format and is set to the top center of the screen with no customization options available in the game.
+
+You can edit the source code files to customize the clock. (MakeClock() is where you would want to make the changes)
+
+Future development may make customization options available within the game allowing seamless customization.
 
 ## Installation
 For simplicity's sake, I suggest you use a mod manager like [BSManager](https://github.com/Zagrios/bs-manager).
