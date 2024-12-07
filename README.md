@@ -1,6 +1,6 @@
 # SimpleClock
 [![Latest Release](https://img.shields.io/github/v/release/MadSquids/SimpleClock?style=for-the-badge)](https://github.com/MadSquids/SimpleClock/releases/latest)\
-This Beat Saber plugin adds a 12-hour AM/PM clock to the HUD of your game using your system's time.
+This Beat Saber plugin adds a clock to the HUD of your game using your system's time and locality.
 
 ## About
 The clock's format is based off your OS's locality settings and is set to the top center of the screen with no customization options available in the game.
