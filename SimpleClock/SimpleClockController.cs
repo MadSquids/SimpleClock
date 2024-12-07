@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 using UnityEngine;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.FloatingScreen;
@@ -102,10 +103,12 @@ namespace SimpleClock
             CoroutineRunner.StopRoutine(_clockUpdater);
         }
 
-        //Returns current time as a String in hours:minutes AM/PM format.
+        //Returns current time as a String in your locale's format.
         private string GetCurrentTime()
         {
-            return DateTime.Now.ToString("hh:mm tt");
+            //Force the German locale for testing
+            var germanCulture = new CultureInfo("de-DE");
+            return DateTime.Now.ToString("t", germanCulture);
         }
 
         //Updates the clockText to the current time every second.
