@@ -12,7 +12,7 @@ Future development may make customization options available within the game allo
 ## Installation
 For simplicity's sake, I suggest you use a mod manager like [BSManager](https://github.com/Zagrios/bs-manager).
 ### If you'd like to manually install.
-- You must have the **THREE** required common BeatSaber mods installed, BSIPA: ^4.3.0, BeatSaberMarkupLanguage: ^1.12.0, SiraUtil: ^3.1.0
+- You must have the **THREE** required common BeatSaber mods installed, BSIPA: ^4.3.5, BeatSaberMarkupLanguage: ^1.12.4, SiraUtil: ^3.1.14
 - Then place the .dll and .pdb files inside your plugins folder.
 
 Otherwise, everything else is handled automatically and upon loading your game you will see the clock in the top center of your screen.
